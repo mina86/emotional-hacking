@@ -9,18 +9,18 @@ tmp/.geometry: bin/choose-size.sh $(FRAMES)
 
 tmp/%.png: tmp/.geometry $(FRAMES)
 	@mkdir -p -- $(dir $@)
-	montage -geometry "$$(cat $<)+5+5" -tile $(basename $(notdir $@)) \
-		$(FRAMES) $@
+	montage -depth 8 -geometry "$$(cat $<)+5+5" \
+		-tile $(basename $(notdir $@)) $(FRAMES) $@
 
 out/%.png: bin/add-sig.sh tmp/%.png src/sig.png
 	@mkdir -p -- $(dir $@)
 	/bin/sh $^ $@
 
 distclean:
-	@rm -rf -- out tmp
+	rm -rf -- out tmp
 
 clean:
-	@rm -rf -- out
+	rm -rf -- out
 
 .PHONY: distclean clean all
 .SECONDARY:

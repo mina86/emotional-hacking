@@ -24,7 +24,7 @@ fi
 
 (
 	set -x
-	convert -background white \
+	convert -depth 8 -background white \
 	        "$img" -extent "${img_w}x$((sig_y + sig_h))" \
 	        "$sig" -geometry "+$sig_x+$sig_y" -composite \
 	        "$tmp"
